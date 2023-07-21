@@ -1,11 +1,32 @@
+"use client";
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import InputCiudad from "@/components/InputCiudad";
+import { useState, useEffect } from "react";
+import FetchClimate from "@/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await FetchClimate();
+        setData(result);
+      } catch (error) {
+        // Handle error, e.g., show an error message or log the error.
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(data);
+
   return (
     <>
       <Head>

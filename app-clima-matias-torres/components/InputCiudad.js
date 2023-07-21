@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 
 const InputCiudad = () => {
@@ -31,7 +32,6 @@ const InputCiudad = () => {
           onKeyPress={envioCiudadEnter}
         />
       </label>
-
       <button onClick={enviarCiudad}>Buscar</button>
     </>
   );
