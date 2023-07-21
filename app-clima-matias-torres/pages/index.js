@@ -1,11 +1,19 @@
+"use client";
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import InputCiudad from "@/components/InputCiudad";
+import { useState } from "react";
+import FetchClimate from "@/utils";
 
+const apiKey = process.env.CLIMA_API;
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [data, setData] = useState(null);
+
+  console.log(FetchClimate({ city: 1878, api: apiKey }));
+
   return (
     <>
       <Head>
