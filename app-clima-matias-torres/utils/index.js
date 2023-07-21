@@ -1,16 +1,17 @@
-const apiKey = process.env.CLIMA_API;
+async function FetchClimate({ city, api }) {
+  var requestOptions = {
+    method: "GET",
+    redirect: "follow",
+  };
+  const response = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}`,
+    requestOptions
+  )
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
 
-const urlApi = `api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=${apiKey}`;
-
-async function FetchClimate({ city }) {
-  const response = await fetch(`${urlApi}${city}`);
-  const data = await response.json();
-
-  if (!data.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return console.log(data.json());
+  return response;
 }
 
 export default FetchClimate;
