@@ -12,8 +12,6 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const [data, setData] = useState(null);
 
-  console.log(FetchClimate({ city: 1878, api: apiKey }));
-
   return (
     <>
       <Head>

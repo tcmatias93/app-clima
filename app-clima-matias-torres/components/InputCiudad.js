@@ -3,37 +3,47 @@
 import React, { useState } from "react";
 
 const InputCiudad = () => {
-  const [ciudad, setCiudad] = useState("");
+  const [city, setCity] = useState("");
+  const [error, setError] = useState("");
 
-  function guardarCiudad(e) {
-    e.preventDefault();
-    setCiudad(e.target.value);
-  }
-
-  function enviarCiudad() {
-    console.log("Ciuda: ", ciudad);
-  }
-
-  function envioCiudadEnter(e) {
-    if (e.key === "Enter") {
-      enviarCiudad();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (city.trim() === "") {
+      setError("Por favor, ingresa una ciudad");
+    } else {
+      setError("");
+      console.log("Ciudad ingresada:", city);
     }
-  }
+  };
+
+  const handleInputChange = (event) => {
+    setCity(event.target.value);
+    setError("");
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSubmit(event);
+    }
+  };
 
   return (
-    <>
-      <label>
-        Ingrese una ciudad:{" "}
-        <input
-          type="text"
-          placeholder="Ej: Ciuda de Mexico"
-          value={ciudad}
-          onChange={guardarCiudad}
-          onKeyPress={envioCiudadEnter}
-        />
-      </label>
-      <button onClick={enviarCiudad}>Buscar</button>
-    </>
+    <div className="App">
+      <form onSubmit={handleSubmit}>
+        <label>
+          Ingrese una Ciudad o CP
+          <input
+            type="text"
+            value={city}
+            onChange={handleInputChange}
+            onKeyPress={handleKeyPress}
+            placeholder="ej: Buenos Aires"
+          />
+        </label>
+        {error && <div style={{ color: "red" }}>{error}</div>}
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
   );
 };
 
