@@ -6,6 +6,8 @@ let clave = process.env.CLAVE_API;
 const InputCiudad = () => {
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
+  const [errrorApi, setErrorApi] = useState("");
+  const [weather, setWeather] = useState(null);
 
   var requestOptions = {
     method: "GET",
@@ -19,15 +21,21 @@ const InputCiudad = () => {
     } else {
       setError("");
       console.log("Ciudad ingresada:", city);
-      const data = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=5f3da5be43514d2f2fa95b7d0e3e01d6`,
+      await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=es&appid=5f3da5be43514d2f2fa95b7d0e3e01d6&units=metric`,
         requestOptions
       )
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.log("error", error));
-
-      console.log(data);
+        .then((response) => {
+          if (!response.ok) throw { response };
+          return response.json();
+        })
+        .then((weatherData) => {
+          console.log(weatherData);
+          setWeather(weatherData);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 
@@ -58,6 +66,31 @@ const InputCiudad = () => {
         {error && <div style={{ color: "red" }}>{error}</div>}
         <button type="submit">Enviar</button>
       </form>
+      {errrorApi && <div style={{ color: "red" }}>{errrorApi}</div>}
+
+      {weather && (
+        <>
+          <div>
+            <div>Ciudad: {weather.name} </div>
+            <div>Temperatura: {weather.main.temp}ºC</div>
+            <div className="card-desc">
+              {" "}
+              Clima:
+              <img
+                src={`http://openweathermap.org/img/w/${weather.weather[0].icon}.png`}
+                alt="icon"
+              />
+              {weather.weather[0].description}
+            </div>
+            <div>Viento: {weather.wind.speed} Km/h</div>
+          </div>
+          <div>
+            <p>Temperatura max: {weather.main.temp_max} ºC</p>
+            <p>Temperatura min: {weather.main.temp_min} ºC</p>
+            <p>Humedad: {weather.main.humidity} </p>
+          </div>
+        </>
+      )}
     </div>
   );
 };
