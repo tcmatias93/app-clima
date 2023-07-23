@@ -1,6 +1,11 @@
 import React from "react";
 
 const DetalleClima = ({ clima }) => {
+  const nuevaFecha = new Date();
+  const dia = nuevaFecha.getDate();
+  const mes = nuevaFecha.getMonth();
+
+  const fechaActual = dia + "/" + mes;
   return (
     <div className="mt-5">
       {clima && (
@@ -9,12 +14,10 @@ const DetalleClima = ({ clima }) => {
             <div className="card mb-3 mx-auto bg-dark text-light">
               <div className="row g-0">
                 <div className="col-md-4">
-                  <h3 className="card-titule">Ciudad: {clima.name} </h3>
-                  <p className="card-date">Dia:</p>
-                  <h2 className="card-temp">
-                    Temperatura: {clima.main.temp}ºC
-                  </h2>
-                  <p className="card-desc">
+                  <h3>Ciudad: {clima.name} </h3>
+                  <h4>Dia: {fechaActual}</h4>
+                  <h2>Temperatura: {clima.main.temp}ºC</h2>
+                  <p>
                     <img
                       src={`http://openweathermap.org/img/w/${clima.weather[0].icon}.png`}
                       alt="icon"
@@ -26,17 +29,11 @@ const DetalleClima = ({ clima }) => {
                 </div>
                 <div className="col-md-8">
                   <div className="card-body text-start mt-2">
-                    <p className="card-text">
-                      sensación térmica: {clima.main.feels_like} ºC
-                    </p>
-                    <p className="card-text">
-                      Temperatura max: {clima.main.temp_max} ºC
-                    </p>
-                    <p className="card-text">
-                      Temperatura min: {clima.main.temp_min} ºC
-                    </p>
-                    <p className="card-text">Humedad: {clima.main.humidity} </p>
-                    <p className="card-text">Viento: {clima.wind.speed} Km/h</p>
+                    <p>sensación térmica: {clima.main.feels_like} ºC</p>
+                    <p>Temperatura max: {clima.main.temp_max} ºC</p>
+                    <p>Temperatura min: {clima.main.temp_min} ºC</p>
+                    <p>Humedad: {clima.main.humidity} </p>
+                    <p>Viento: {clima.wind.speed} Km/h</p>
                   </div>
                 </div>
               </div>
