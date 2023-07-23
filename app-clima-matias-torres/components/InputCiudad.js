@@ -24,7 +24,7 @@ const InputCiudad = ({ handleSubmit, city, setCity, error, setError }) => {
               value={city}
               onChange={handleInputChange}
               onKeyPress={handleKeyPress}
-              placeholder="Ingrese una Ciudad o CP"
+              placeholder="Ej: Ciudad de mexico "
               className="form-control"
             />
 
@@ -33,7 +33,7 @@ const InputCiudad = ({ handleSubmit, city, setCity, error, setError }) => {
             </button>
           </div>
         </form>
-        {error && <div style={{ color: "red" }}>{error}</div>}
+        {error && <h4 className="text-danger text-center">{error}</h4>}
       </div>
     </>
   );

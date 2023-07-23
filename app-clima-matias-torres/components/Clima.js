@@ -6,7 +6,7 @@ import DetalleClima from "./DetalleClima";
 
 const Clima = () => {
   const [city, setCity] = useState("");
-  const [weather, setWeather] = useState(null);
+  const [clima, setClima] = useState(null);
   const [error, setError] = useState("");
 
   var requestOptions = {
@@ -29,9 +29,9 @@ const Clima = () => {
           if (!response.ok) throw { response };
           return response.json();
         })
-        .then((weatherData) => {
-          console.log(weatherData);
-          setWeather(weatherData);
+        .then((climaData) => {
+          console.log(climaData);
+          setClima(climaData);
         })
         .catch((error) => {
           console.log(error);
@@ -48,7 +48,7 @@ const Clima = () => {
         setError={setError}
       />
 
-      <DetalleClima weather={weather} />
+      <DetalleClima clima={clima} />
     </>
   );
 };
