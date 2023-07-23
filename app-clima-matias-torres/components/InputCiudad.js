@@ -33,7 +33,7 @@ const InputCiudad = ({ handleSubmit, city, setCity, error, setError }) => {
             </button>
           </div>
         </form>
-        {error && <h4 className="text-danger">{error}</h4>}
+        {error && <h4 className="text-danger text-center">{error}</h4>}
       </div>
     </>
   );

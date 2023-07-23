@@ -1,7 +1,7 @@
 "use client";
 import Head from "next/head";
 import { Inter } from "next/font/google";
-
+import styles from "@/styles/Home.module.css";
 import Clima from "@/components/Clima";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,7 +16,7 @@ export default function Home() {
           content="Pon en que ciudad o localidad te encuentras y te mostramos el clima."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/clima.jpg" />
         <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
@@ -29,7 +29,7 @@ export default function Home() {
           crossorigin="anonymous"
         ></script>
       </Head>
-      <main className={`${inter.className} App`}>
+      <main className={`${inter.className} ${styles.body}App`}>
         <div className="navbar bg-dark text-light mb-5">
           <div className="container-fluid">
             <h3 className="mx-auto">Tiempo meteorológico</h3>
