@@ -1,6 +1,6 @@
 import React from "react";
 
-const DetalleClima = ({ clima }) => {
+const DetalleClima = ({ clima, errorApi }) => {
   const nuevaFecha = new Date();
   const dia = nuevaFecha.getDate();
   const mes = nuevaFecha.getMonth();
@@ -40,6 +40,10 @@ const DetalleClima = ({ clima }) => {
             </div>
           </div>
         </>
+      )}
+
+      {errorApi && (
+        <h4 className="text-danger text-center">Ingrese otra ciudad</h4>
       )}
     </div>
   );

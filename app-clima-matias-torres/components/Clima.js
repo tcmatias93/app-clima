@@ -8,6 +8,7 @@ const Clima = () => {
   const [city, setCity] = useState("");
   const [clima, setClima] = useState(null);
   const [error, setError] = useState("");
+  const [errorApi, setErrorApi] = useState(null);
 
   var requestOptions = {
     method: "GET",
@@ -18,9 +19,10 @@ const Clima = () => {
     event.preventDefault();
     if (city.trim() === "") {
       setError("Por favor, ingresa una ciudad");
+      setClima(null);
+      setErrorApi(null);
     } else {
       setError("");
-      console.log("Ciudad ingresada:", city);
       await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=es&appid=5f3da5be43514d2f2fa95b7d0e3e01d6&units=metric`,
         requestOptions
@@ -30,11 +32,13 @@ const Clima = () => {
           return response.json();
         })
         .then((climaData) => {
-          console.log(climaData);
           setClima(climaData);
+          setErrorApi(null);
         })
         .catch((error) => {
-          console.log(error);
+          setClima(null);
+          setErrorApi(error);
+          console.log("error Api ", error);
         });
     }
   };
@@ -48,7 +52,7 @@ const Clima = () => {
         setError={setError}
       />
 
-      <DetalleClima clima={clima} />
+      <DetalleClima clima={clima} errorApi={errorApi} />
     </>
   );
 };
